@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const Room = require("../models/Room");
 
-//create
+// CREATE
 exports.createRoom = async (req, res) => {
-    try {
-        const room = await Room.create(req.body);
-        res.status(201).json(room);
-    } catch (err) {
-        res.status(400).json({message: err.message });
-    }    
+  try {
+    const room = await Room.create(req.body);
+    res.status(201).json(room);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
 };
 
 // READ all (with search, filter, sort)
