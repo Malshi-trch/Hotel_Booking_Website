@@ -1,175 +1,10 @@
-### Create rooms
-### Room 1
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Ocean View Suite",
-  "type": "Suite",
-  "pricePerNight": 250,
-  "capacity": 4,
-  "description": "Spacious suite with sea view",
-  "imageUrl": "https://images.unsplash.com/photo-1566665797739-1674de7a421a",
-  "amenities": ["WiFi", "AC", "Balcony", "Breakfast"]
-}
-
-### Room 2
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Cozy Garden Single",
-  "type": "Single",
-  "pricePerNight": 60,
-  "capacity": 1,
-  "description": "Quiet single room overlooking the garden",
-  "imageUrl": "https://placehold.co/600x400?text=Garden+Single",
-  "amenities": ["WiFi", "Fan"]
-}
-
-### Room 3
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "City Single",
-  "type": "Single",
-  "pricePerNight": 75,
-  "capacity": 1,
-  "description": "Compact room close to the city centre",
-  "imageUrl": "https://placehold.co/600x400?text=City+Single",
-  "amenities": ["WiFi", "AC", "TV"]
-}
-
-### Room 4
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Classic Double",
-  "type": "Double",
-  "pricePerNight": 120,
-  "capacity": 2,
-  "description": "Comfortable double room with a queen bed",
-  "imageUrl": "https://placehold.co/600x400?text=Classic+Double",
-  "amenities": ["WiFi", "AC", "TV"]
-}
-
-### Room 5
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Poolside Double",
-  "type": "Double",
-  "pricePerNight": 140,
-  "capacity": 2,
-  "description": "Double room with direct pool access",
-  "imageUrl": "https://placehold.co/600x400?text=Poolside+Double",
-  "amenities": ["WiFi", "AC", "Pool Access"]
-}
-
-### Room 6
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Deluxe Double",
-  "type": "Double",
-  "pricePerNight": 150,
-  "capacity": 3,
-  "description": "Larger double room with a sofa bed",
-  "imageUrl": "https://placehold.co/600x400?text=Deluxe+Double",
-  "amenities": ["WiFi", "AC", "TV", "Mini Bar"]
-}
-
-### Room 7
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Family Double",
-  "type": "Double",
-  "pricePerNight": 180,
-  "capacity": 4,
-  "description": "Spacious room for a small family",
-  "imageUrl": "https://placehold.co/600x400?text=Family+Double",
-  "amenities": ["WiFi", "AC", "TV", "Breakfast"]
-}
-
-### Room 8
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Presidential Suite",
-  "type": "Suite",
-  "pricePerNight": 280,
-  "capacity": 4,
-  "description": "Luxury suite with a lounge and private balcony",
-  "imageUrl": "https://placehold.co/600x400?text=Presidential+Suite",
-  "amenities": ["WiFi", "AC", "Balcony", "Breakfast", "Bathtub"]
-}
-
-### Room 9
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Executive Suite",
-  "type": "Suite",
-  "pricePerNight": 300,
-  "capacity": 5,
-  "description": "Our largest suite with two bedrooms",
-  "imageUrl": "https://placehold.co/600x400?text=Executive+Suite",
-  "amenities": ["WiFi", "AC", "Kitchenette", "Breakfast", "Balcony"]
-}
+### ===== READ ROOMS (public) =====
 
 ### Get all rooms
 GET http://localhost:5000/api/rooms
 
-### Get one room (replace PASTE_ID with a real _id)
+### Get one room (replace PASTE_ID)
 GET http://localhost:5000/api/rooms/PASTE_ID
-
-### Error test: empty body
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{}
-
-### Error test: bad ID
-GET http://localhost:5000/api/rooms/123
-
-### Update a room
-PUT http://localhost:5000/api/rooms/PASTE_ID
-Content-Type: application/json
-
-{ "pricePerNight": 300 }
-
-### Delete a room
-DELETE http://localhost:5000/api/rooms/PUT http://localhost:5000/api/rooms/PASTE_ID
-
-### Error test: invalid room type (expect 400)
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Test Room",
-  "type": "Palace",
-  "pricePerNight": 100,
-  "capacity": 2
-}
-
-### Error test: negative price (expect 400)
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-
-{
-  "name": "Test Room",
-  "type": "Single",
-  "pricePerNight": -50,
-  "capacity": 1
-}
 
 ### Filter by type
 GET http://localhost:5000/api/rooms?type=Double
@@ -189,5 +24,141 @@ GET http://localhost:5000/api/rooms?sort=price_asc
 ### Sort by price, high to low
 GET http://localhost:5000/api/rooms?sort=price_desc
 
-### Combined: Double rooms under 160, cheapest first
-GET http://localhost:5000/api/rooms?type=Double&maxPrice=160&sort=price_asc
+### Error: bad ID (expect 404)
+GET http://localhost:5000/api/rooms/123
+
+
+### ===== ADMIN ROOM ACTIONS (need admin token) =====
+
+### Create a room
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+Authorization: Bearer PASTE_ADMIN_TOKEN
+
+{
+  "name": "Test Room",
+  "type": "Single",
+  "pricePerNight": 50,
+  "capacity": 1
+}
+
+### Update a room
+PUT http://localhost:5000/api/rooms/PASTE_ID
+Content-Type: application/json
+Authorization: Bearer PASTE_ADMIN_TOKEN
+
+{ "pricePerNight": 300 }
+
+### Delete a room
+DELETE http://localhost:5000/api/rooms/PASTE_ID
+Authorization: Bearer PASTE_ADMIN_TOKEN
+
+### Error: invalid room type (expect 400)
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+Authorization: Bearer PASTE_ADMIN_TOKEN
+
+{
+  "name": "Test Room",
+  "type": "Palace",
+  "pricePerNight": 100,
+  "capacity": 2
+}
+
+### Error: negative price (expect 400)
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+Authorization: Bearer PASTE_ADMIN_TOKEN
+
+{
+  "name": "Test Room",
+  "type": "Single",
+  "pricePerNight": -50,
+  "capacity": 1
+}
+
+### Error: create room with no token (expect 401)
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+
+{
+  "name": "Test Room",
+  "type": "Single",
+  "pricePerNight": 50,
+  "capacity": 1
+}
+
+### Error: create room as a guest (expect 403)
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+Authorization: Bearer PASTE_GUEST_TOKEN
+
+{
+  "name": "Test Room",
+  "type": "Single",
+  "pricePerNight": 50,
+  "capacity": 1
+}
+
+
+### ===== AUTH =====
+
+### Register
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test Guest",
+  "email": "guest@test.com",
+  "password": "guest123"
+}
+
+### Error: duplicate email (expect 400)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Test Guest",
+  "email": "guest@test.com",
+  "password": "guest123"
+}
+
+### Error: missing fields (expect 400)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "x@test.com"
+}
+
+### Error: short password (expect 400)
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Short Pass",
+  "email": "short@test.com",
+  "password": "123"
+}
+
+### Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "guest@test.com",
+  "password": "guest123"
+}
+
+### Error: wrong password (expect 401)
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "guest@test.com",
+  "password": "wrongpass"
+}
+
+### Who am I
+GET http://localhost:5000/api/auth/me
+Authorization: Bearer PASTE_TOKEN

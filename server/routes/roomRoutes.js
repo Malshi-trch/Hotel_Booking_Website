@@ -7,8 +7,13 @@ const {
   updateRoom,
   deleteRoom,
 } = require("../controllers/roomController");
+const { protect, adminOnly } = require("../middleware/auth");
 
-router.route("/").get(getRooms).post(createRoom);
-router.route("/:id").get(getRoomById).put(updateRoom).delete(deleteRoom);
+router.route("/").get(getRooms).post(protect, adminOnly, createRoom);
+router
+  .route("/:id")
+  .get(getRoomById)
+  .put(protect, adminOnly, updateRoom)
+  .delete(protect, adminOnly, deleteRoom);
 
 module.exports = router;
