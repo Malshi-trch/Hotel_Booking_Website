@@ -9,6 +9,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/api/bookings", require("./routes/bookingRoutes"));
 
 app.use("/api/rooms", require("./routes/roomRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
