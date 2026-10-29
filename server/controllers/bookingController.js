@@ -16,6 +16,9 @@ const startOfToday = () => {
   return t;
 };
 
+// Reloads a booking with its room details filled in
+const withRoom = (id) => Booking.findById(id).populate("room", ROOM_FIELDS);
+
 // Checks everything about a booking and works out the price.
 // Returns { error, status } if something is wrong, otherwise the clean values.
 const validateBooking = async ({ roomId, checkIn, checkOut, guests, excludeId, checkPast }) => {
@@ -94,9 +97,9 @@ exports.createBooking = async (req, res) => {
       totalPrice: result.totalPrice,
     });
 
-    const populated = await booking.populate("room", ROOM_FIELDS);
-    res.status(201).json(populated);
+    res.status(201).json(await withRoom(booking._id));
   } catch (err) {
+    console.error("createBooking error:", err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -109,6 +112,7 @@ exports.getMyBookings = async (req, res) => {
       .sort({ createdAt: -1 });
     res.json(bookings);
   } catch (err) {
+    console.error("getMyBookings error:", err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -122,6 +126,7 @@ exports.getAllBookings = async (req, res) => {
       .sort({ createdAt: -1 });
     res.json(bookings);
   } catch (err) {
+    console.error("getAllBookings error:", err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -174,9 +179,9 @@ exports.updateBooking = async (req, res) => {
     }
 
     await booking.save();
-    const populated = await booking.populate("room", ROOM_FIELDS);
-    res.json(populated);
+    res.json(await withRoom(booking._id));
   } catch (err) {
+    console.error("updateBooking error:", err);
     res.status(500).json({ message: err.message });
   }
 };
@@ -202,6 +207,7 @@ exports.cancelBooking = async (req, res) => {
     await booking.save();
     res.json({ message: "Booking cancelled", booking });
   } catch (err) {
+    console.error("cancelBooking error:", err);
     res.status(500).json({ message: err.message });
   }
 };
