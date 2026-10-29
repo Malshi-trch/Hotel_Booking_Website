@@ -182,9 +182,3 @@ Content-Type: application/json
   "password": "guest123"
 }
 
-### Error: room with empty body (expect 400 with readable messages)
-POST http://localhost:5000/api/rooms
-Content-Type: application/json
-Authorization: Bearer PASTE_ADMIN_TOKEN
-
-{}

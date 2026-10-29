@@ -35,7 +35,7 @@ export default function Rooms() {
         const { data } = await api.get("/rooms", { params });
         setRooms(data);
         setError("");
-      } catch (err) {
+      } catch {
         setError("Could not load rooms. Is the server running?");
       } finally {
         setLoading(false);

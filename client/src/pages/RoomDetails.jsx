@@ -26,7 +26,7 @@ export default function RoomDetails() {
       try {
         const { data } = await api.get(`/rooms/${id}`);
         setRoom(data);
-      } catch (err) {
+      } catch {
         setError("Room not found.");
       } finally {
         setLoading(false);
@@ -72,7 +72,7 @@ export default function RoomDetails() {
         guests,
       });
       navigate("/my-bookings", { state: { message: "Booking confirmed!" } });
-    } catch (err) {
+    } catch {
       setBookingError(err.response?.data?.message || "Booking failed. Please try again.");
     } finally {
       setSubmitting(false);

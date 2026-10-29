@@ -13,7 +13,7 @@ export default function AdminRooms() {
       try {
         const { data } = await api.get("/rooms");
         setRooms(data);
-      } catch (err) {
+      } catch(err) {
         setError("Could not load rooms.");
       } finally {
         setLoading(false);
@@ -29,7 +29,7 @@ export default function AdminRooms() {
       setRooms(rooms.filter((r) => r._id !== room._id));
       setMessage("Room deleted.");
       setError("");
-    } catch (err) {
+    } catch {
       setError(err.response?.data?.message || "Could not delete the room.");
       setMessage("");
     }

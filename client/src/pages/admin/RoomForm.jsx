@@ -38,7 +38,7 @@ export default function RoomForm() {
           amenities: (data.amenities || []).join(", "),
           isAvailable: data.isAvailable,
         });
-      } catch (err) {
+      } catch {
         setError("Room not found.");
       } finally {
         setLoading(false);
@@ -87,7 +87,7 @@ export default function RoomForm() {
         await api.post("/rooms", payload);
       }
       navigate("/admin/rooms");
-    } catch (err) {
+    } catch {
       setError(err.response?.data?.message || "Could not save the room.");
     } finally {
       setSubmitting(false);

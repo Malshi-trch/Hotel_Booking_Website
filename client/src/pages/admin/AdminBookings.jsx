@@ -15,7 +15,7 @@ export default function AdminBookings() {
       try {
         const { data } = await api.get("/bookings");
         setBookings(data);
-      } catch (err) {
+      } catch {
         setError("Could not load bookings.");
       } finally {
         setLoading(false);
@@ -34,7 +34,7 @@ export default function AdminBookings() {
       replace({ _id: b._id, status: "cancelled" });
       setMessage("Booking cancelled.");
       setError("");
-    } catch (err) {
+    } catch {
       setError(err.response?.data?.message || "Could not cancel the booking.");
       setMessage("");
     }
@@ -46,7 +46,7 @@ export default function AdminBookings() {
       replace({ _id: b._id, status: "confirmed" });
       setMessage("Booking restored.");
       setError("");
-    } catch (err) {
+    } catch {
       setError(err.response?.data?.message || "Could not restore the booking.");
       setMessage("");
     }

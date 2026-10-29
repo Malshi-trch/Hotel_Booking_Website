@@ -22,7 +22,7 @@ export default function MyBookings() {
       try {
         const { data } = await api.get("/bookings/my");
         setBookings(data);
-      } catch (err) {
+      } catch {
         setError("Could not load your bookings.");
       } finally {
         setLoading(false);
@@ -68,7 +68,7 @@ export default function MyBookings() {
       setBookings(bookings.map((x) => (x._id === b._id ? data : x)));
       setEditingId(null);
       setMessage("Booking updated.");
-    } catch (err) {
+    } catch {
       setEditError(err.response?.data?.message || "Could not update the booking.");
     }
   };
@@ -81,7 +81,7 @@ export default function MyBookings() {
         bookings.map((x) => (x._id === b._id ? { ...x, status: "cancelled" } : x))
       );
       setMessage("Booking cancelled.");
-    } catch (err) {
+    } catch {
       setError(err.response?.data?.message || "Could not cancel the booking.");
     }
   };
