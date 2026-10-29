@@ -114,8 +114,7 @@ export default function MyBookings() {
                 </p>
               </div>
 
-              {b.status === "confirmed" && editingId !== b._id && (
-                <div className="booking-actions">
+{b.status === "confirmed" && b.room && editingId !== b._id && (                <div className="booking-actions">
                   <button className="btn" onClick={() => startEdit(b)}>Edit</button>
                   <button className="btn btn-danger" onClick={() => cancelBooking(b)}>
                     Cancel
