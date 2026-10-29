@@ -7,6 +7,9 @@ import RoomDetails from "./pages/RoomDetails";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyBookings from "./pages/MyBookings";
+import AdminRooms from "./pages/admin/AdminRooms";
+import RoomForm from "./pages/admin/RoomForm";
+import AdminBookings from "./pages/admin/AdminBookings";
 
 function App() {
   return (
@@ -24,6 +27,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <MyBookings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/rooms"
+            element={
+              <ProtectedRoute adminOnly>
+                <AdminRooms />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/rooms/new"
+            element={
+              <ProtectedRoute adminOnly>
+                <RoomForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/rooms/:id/edit"
+            element={
+              <ProtectedRoute adminOnly>
+                <RoomForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/bookings"
+            element={
+              <ProtectedRoute adminOnly>
+                <AdminBookings />
               </ProtectedRoute>
             }
           />

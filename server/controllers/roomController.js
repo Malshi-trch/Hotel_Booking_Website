@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Room = require("../models/Room");
+const Booking = require("../models/Booking");
 
 // CREATE
 exports.createRoom = async (req, res) => {
@@ -74,6 +75,21 @@ exports.deleteRoom = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(404).json({ message: "Room not found" });
     }
+
+    // block deletion while there are upcoming confirmed bookings
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    const active = await Booking.countDocuments({
+      room: req.params.id,
+      status: "confirmed",
+      checkOut: { $gte: today },
+    });
+    if (active > 0) {
+      return res.status(400).json({
+        message: `Cannot delete this room: it has ${active} active booking(s)`,
+      });
+    }
+
     const room = await Room.findByIdAndDelete(req.params.id);
     if (!room) return res.status(404).json({ message: "Room not found" });
     res.json({ message: "Room deleted" });

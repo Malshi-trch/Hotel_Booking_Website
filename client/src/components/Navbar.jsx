@@ -18,7 +18,14 @@ export default function Navbar() {
         <Link to="/rooms">Rooms</Link>
         {user ? (
           <>
-            <Link to="/my-bookings">My Bookings</Link>
+            {user.role === "admin" ? (
+              <>
+                <Link to="/admin/rooms">Manage Rooms</Link>
+                <Link to="/admin/bookings">All Bookings</Link>
+              </>
+            ) : (
+              <Link to="/my-bookings">My Bookings</Link>
+            )}
             <span className="nav-user">
               {user.name}{user.role === "admin" ? " (admin)" : ""}
             </span>
