@@ -162,3 +162,29 @@ Content-Type: application/json
 ### Who am I
 GET http://localhost:5000/api/auth/me
 Authorization: Bearer PASTE_TOKEN
+
+### Error: invalid JSON (expect 400 "Invalid JSON in request body")
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{ "email": 
+
+### Error: unknown route (expect 404 JSON message)
+GET http://localhost:5000/api/nothing
+
+### Error: invalid email at register (expect 400 "Please enter a valid email")
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Bad Email",
+  "email": "not-an-email",
+  "password": "guest123"
+}
+
+### Error: room with empty body (expect 400 with readable messages)
+POST http://localhost:5000/api/rooms
+Content-Type: application/json
+Authorization: Bearer PASTE_ADMIN_TOKEN
+
+{}

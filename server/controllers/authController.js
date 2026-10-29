@@ -5,7 +5,7 @@ const generateToken = (id) =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
 // REGISTER
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -28,8 +28,8 @@ exports.register = async (req, res) => {
       role: user.role,
       token: generateToken(user._id),
     });
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+   } catch (err) {
+    next(err);
   }
 };
 

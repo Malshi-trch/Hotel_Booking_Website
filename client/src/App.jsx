@@ -10,6 +10,7 @@ import MyBookings from "./pages/MyBookings";
 import AdminRooms from "./pages/admin/AdminRooms";
 import RoomForm from "./pages/admin/RoomForm";
 import AdminBookings from "./pages/admin/AdminBookings";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -62,6 +63,9 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route path="*" element={<NotFound />} />
+            
         </Routes>
       </main>
     </>

@@ -113,3 +113,15 @@ a { text-decoration: none; color: inherit; }
   border-radius: 6px; font-size: 1rem; font-family: inherit; }
 .check-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
 .check-row input { width: auto; }
+
+@media (max-width: 640px) {
+  .navbar { flex-direction: column; gap: 10px; padding: 12px 16px; }
+  .nav-links { justify-content: center; gap: 12px; }
+  .container { padding: 16px 12px; }
+  .hero { padding: 40px 8px; }
+  .hero h1 { font-size: 1.7rem; }
+  .filters input[type="number"], .filters select { flex: 1 1 45%; width: auto; }
+  .form-card { margin: 16px auto; padding: 20px; }
+  .booking-item { flex-direction: column; }
+  .details { padding: 16px; }
+}

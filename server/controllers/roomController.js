@@ -3,15 +3,14 @@ const Room = require("../models/Room");
 const Booking = require("../models/Booking");
 
 // CREATE
-exports.createRoom = async (req, res) => {
+exports.createRoom = async (req, res, next) => {
   try {
     const room = await Room.create(req.body);
     res.status(201).json(room);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    next(err);
   }
 };
-
 // READ all (with search, filter, sort)
 exports.getRooms = async (req, res) => {
   try {
@@ -53,7 +52,7 @@ exports.getRoomById = async (req, res) => {
 };
 
 // UPDATE
-exports.updateRoom = async (req, res) => {
+exports.updateRoom = async (req, res, next) => {
   try {
     if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
       return res.status(404).json({ message: "Room not found" });
@@ -65,7 +64,7 @@ exports.updateRoom = async (req, res) => {
     if (!room) return res.status(404).json({ message: "Room not found" });
     res.json(room);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    next(err);
   }
 };
 
