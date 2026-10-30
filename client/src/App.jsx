@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Rooms from "./pages/Rooms";
@@ -63,11 +64,10 @@ function App() {
               </ProtectedRoute>
             }
           />
-
           <Route path="*" element={<NotFound />} />
-              
         </Routes>
       </main>
+      <Footer />
     </>
   );
 }

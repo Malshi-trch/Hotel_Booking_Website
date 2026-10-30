@@ -44,6 +44,28 @@ const rooms = [
     amenities: ["WiFi", "AC", "Kitchenette", "Breakfast", "Balcony"] },
 ];
 
+const images = {
+  Single: "/images/single.jpg",
+  Double: "/images/double.jpg",
+  Suite: "/images/suite.jpg",
+};
+
+const roomImages = {
+  "Cozy Garden Single": "/images/rooms/cozy-garden-single.jpg",
+  "City Single": "/images/rooms/city-single.jpg",
+  "Classic Double": "/images/rooms/classic-double.jpg",
+  "Poolside Double": "/images/rooms/poolside-double.jpg",
+  "Deluxe Double": "/images/rooms/deluxe-double.jpg",
+  "Family Double": "/images/rooms/family-double.jpg",
+  "Presidential Suite": "/images/rooms/presidential-suite.jpg",
+  "Executive Suite": "/images/rooms/executive-suite.jpg",
+  "Ocean View Suite": "/images/rooms/ocean-view-suite.jpg",
+};
+
+rooms.forEach((r) => {
+  r.imageUrl = roomImages[r.name] || images[r.type];
+});
+
 const seed = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);

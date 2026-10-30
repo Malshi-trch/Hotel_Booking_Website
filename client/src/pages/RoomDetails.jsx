@@ -93,7 +93,7 @@ export default function RoomDetails() {
       <h2>{room.name}</h2>
       <span className="badge">{room.type}</span>
       <p>{room.description}</p>
-      <p>Capacity: {room.capacity} guests</p>
+      <p>Capacity: {room.capacity} {room.capacity === 1 ? "guest" : "guests"}</p>
       <p className="price">${room.pricePerNight} <small>/ night</small></p>
 
       <h4>Amenities</h4>
