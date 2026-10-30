@@ -13,7 +13,7 @@ export default function AdminRooms() {
       try {
         const { data } = await api.get("/rooms");
         setRooms(data);
-      } catch(err) {
+      } catch {
         setError("Could not load rooms.");
       } finally {
         setLoading(false);
