@@ -238,7 +238,7 @@ The user interface was tested manually, including a phone-width layout.
 
 ## Future improvements
 
-- Online p,yments and email confirmations
+- Online payments and email confirmations
 - Multiple hotels, each with its own owner account
 - Room availability calendar and reviews
   
